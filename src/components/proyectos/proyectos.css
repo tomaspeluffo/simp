@@ -1,0 +1,29 @@
+.contenedor{
+    display: flex;
+    flex-direction: column;
+    margin-top: 4vh;
+    justify-content: center;
+
+
+}
+
+h1{
+    margin-bottom: 5vh;
+    display: flex;
+    text-align: center;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.link-empleado{
+    background-color: transparent;
+    color: white;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+

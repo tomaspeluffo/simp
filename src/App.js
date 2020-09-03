@@ -1,25 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import{BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './components/home/Home'
+import NuevoEmpleado from './components/nuevoempleado/NuevoEmpleado'
+import EditarEmpleado from './components/editarempleado/EditarEmpleado'
+import NuevoProyecto from './components/nuevoproyecto/NuevoProyecto'
+import EditarProyecto from './components/editarproyectos/EditarProyecto'
+import Proyectos from './components/proyectos/Proyectos'
+import Empleados from './components/empleados/Empleados'
+
+// REDUX
+import { Provider } from 'react-redux'
+import generateStore from './store'
+
+let storePlus = generateStore()
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Provider store={storePlus}>
+        <Switch>
+          <Route exact path ='/' component={Home} />
+          <Route exact path ='/empleados/nuevo' component={NuevoEmpleado} />
+          <Route exact path ='/empleados/editar:id' component={EditarEmpleado} />
+          <Route exact path ='/empleados' component={Empleados} />
+          <Route exact path ='/proyectos/nuevo' component={NuevoProyecto} />
+          <Route exact path ='/proyectos/editar:id' component={EditarProyecto} />
+          <Route exact path ='/proyectos' component={Proyectos} />
+        </Switch>
+      </Provider>
+    </Router>
   );
 }
 
