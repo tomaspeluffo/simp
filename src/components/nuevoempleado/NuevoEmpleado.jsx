@@ -1,39 +1,48 @@
-    import React, { useState } from 'react'
+    import React, { useState, useEffect } from 'react'
 import './nuevoempleado.css';
 import { Link } from 'react-router-dom'
 
 
 // Redux
-import {crearEmpleadoAction} from '../../actions/empleadosAction'
-import {useDispatch} from 'react-redux'
+import {crearEmpleadoAction, obtenerEmpleadosAction} from '../../actions/empleadosAction'
+import {useDispatch, useSelector} from 'react-redux'
 
 
 
 const NuevoEmpleado = () => {
 
+    const dispatch = useDispatch()
+
+    const id = useSelector( (state) => state.usuario.user)  
+    const {uid} = id
+    console.log(uid)
     
 
-    const [empleado, guardarEmpleado] = useState({
+
+    
+
+    const [nuevoEmpleado, guardarNuevoEmpleado] = useState({
         nombre: "",
         dni : "", 
         cuil: "",
         fecha: "",
         domicilio:"",
         proyecto: "",
-        fechaF: ""
+        fechaF: "",
+        idUsuario: uid
+
 
     })
 
-    const {nombre, dni, cuil, fecha, domicilio, proyecto, fechaF} = empleado
+    const {nombre, dni, cuil, fecha, domicilio, proyecto, fechaF} = nuevoEmpleado
 
-    const dispatch = useDispatch()
 
-    const agregarEmpleados = empleado => dispatch( crearEmpleadoAction(empleado) )
+    const agregarEmpleados = nuevoEmpleado => dispatch( crearEmpleadoAction(nuevoEmpleado) )
     
 
     const eventHandler = e => {
-        guardarEmpleado({
-            ...empleado, 
+        guardarNuevoEmpleado({
+            ...nuevoEmpleado, 
             [e.target.name] : e.target.value
         })
     }
@@ -41,9 +50,9 @@ const NuevoEmpleado = () => {
     const submitEmpleado= (e) =>{
         e.preventDefault()
 
-        agregarEmpleados(empleado)
+        agregarEmpleados(nuevoEmpleado)
 
-        guardarEmpleado({
+        guardarNuevoEmpleado({
             nombre: "",
             dni : "", 
             cuil: "",

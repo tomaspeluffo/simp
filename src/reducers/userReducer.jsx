@@ -18,7 +18,7 @@ export default function (state = initalState, action){
     switch (action.type) {
     
     case LOGOUT_EXITO:
-        return { ...state, loggedIn:false, }
+        return { ...state, loggedIn:false, user: [] }
 
     case LOGIN_ERROR:
         return{...state, fetching: false, loggedIn: false}

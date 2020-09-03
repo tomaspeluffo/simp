@@ -25,25 +25,23 @@ export function crearEmpleadoAction(empleado){
     }
 }
 
-const crearEmpleadoExito = (empleado) => ({ 
+const crearEmpleadoExito = (empleados) => ({ 
     type: CREAR_EMPLEADO,
-    payload: empleado
+    payload: empleados
 })
 
 
-export const obtenerEmpleadosAction = () =>(dispatch, getState) =>{
+export const obtenerEmpleadosAction = () =>async (dispatch, getState) =>{
     dispatch(leerEmpleados())
 
     const {uid} = getState().usuario.user
-    return obtenerEmpleados(uid)
-    .then(empleado =>{
-        dispatch(leerEmpleadosExito(empleado))
-    })
 
-    .catch(error =>{
-        console.log(error)
-        dispatch(leerEmpleadosError(error))
-    })
+     const listado = await obtenerEmpleados(uid)
+     console.log(listado)
+
+        dispatch(leerEmpleadosExito())
+
+        dispatch(leerEmpleadosError())
 }
 
 const leerEmpleados = ()=>({
@@ -52,12 +50,12 @@ const leerEmpleados = ()=>({
 
 const leerEmpleadosExito = (empleado) =>({
     type: LEEER_EMPLEADO_EXITO,
-    payload: [...empleado]
+    // payload: [...empleado]
 })
 
-const leerEmpleadosError = (error) =>({
+const leerEmpleadosError = () =>({
     type: LEEER_EMPLEADO_ERROR,
-    payload: error.message
+    // payload: error.message
 })
 
 

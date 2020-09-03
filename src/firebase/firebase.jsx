@@ -18,22 +18,20 @@ export function loginWithGoogle() {
 
 
 export function signOutGoolge(){
-    firebase.auth().signOut() 
+    return firebase.auth().signOut() 
 }
 
 
 let empleados = firebase.firestore().collection('empleados');
 
 
-export function crearEmpleado(empleado, uid){
-    return empleados.doc(uid).set({empleado})
+export function crearEmpleado(empleado){
+    return empleados.add({empleado})
         
 } 
 
 
-export function obtenerEmpleados(uid){
-    return empleados.doc(uid).get()
-        .then(snap => { 
-        return snap.data().empleado
-    })
+export async function obtenerEmpleados(uid){
+    return await empleados.where('idUsuario', "==", uid).get() 
+  
 }
