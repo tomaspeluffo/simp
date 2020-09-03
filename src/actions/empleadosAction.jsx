@@ -36,26 +36,27 @@ export const obtenerEmpleadosAction = () =>async (dispatch, getState) =>{
 
     const {uid} = getState().usuario.user
 
-     const listado = await obtenerEmpleados(uid)
-     console.log(listado)
+    try {
+     let listado = await obtenerEmpleados()
+     dispatch(leerEmpleadosExito(listado))
 
-        dispatch(leerEmpleadosExito())
-
-        dispatch(leerEmpleadosError())
+    } catch (error) {
+        console.log(error.response)
+        dispatch(leerEmpleadosError())   
+    }
 }
 
 const leerEmpleados = ()=>({
     type: LEEER_EMPLEADO
 })
 
-const leerEmpleadosExito = (empleado) =>({
+const leerEmpleadosExito = (listado) =>({
     type: LEEER_EMPLEADO_EXITO,
-    // payload: [...empleado]
+    payload: listado
 })
 
 const leerEmpleadosError = () =>({
     type: LEEER_EMPLEADO_ERROR,
-    // payload: error.message
 })
 
 

@@ -41,7 +41,7 @@ const Empleados = () => {
                     </tr>  
                 </thead>
                 <tbody>
-                    {/* {listado.length === 0 ? null : (
+                    {listado.length === 0 ? null : (
                         listado.map(empleado => (
                             console.log(empleado),
                             <Empleado 
@@ -49,7 +49,7 @@ const Empleados = () => {
                                 empleado = {empleado}
                             />
                         ))
-                    )} */}
+                    )}
                 </tbody>
             </table>
 

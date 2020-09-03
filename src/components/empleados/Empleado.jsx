@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Empleado = () => {
+const Empleado = ({empleado}) => {
     return ( 
-        <p>Esto es un empleado</p>
+        <p>{empleado.nombre}</p>
 
      );
 }
