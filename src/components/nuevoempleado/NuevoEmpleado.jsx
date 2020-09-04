@@ -15,12 +15,7 @@ const NuevoEmpleado = () => {
 
     const id = useSelector( (state) => state.usuario.user)  
     const {uid} = id
-    console.log(uid)
     
-
-
-    
-
     const [nuevoEmpleado, guardarNuevoEmpleado] = useState({
         nombre: "",
         dni : "", 
@@ -30,11 +25,9 @@ const NuevoEmpleado = () => {
         proyecto: "",
         fechaF: "",
         idUsuario: uid
-
-
     })
 
-    const {nombre, dni, cuil, fecha, domicilio, proyecto, fechaF} = nuevoEmpleado
+    const {nombre, dni, cuil, fecha, domicilio, proyecto, fechaF, idUsuario} = nuevoEmpleado
 
 
     const agregarEmpleados = nuevoEmpleado => dispatch( crearEmpleadoAction(nuevoEmpleado) )
@@ -49,6 +42,9 @@ const NuevoEmpleado = () => {
 
     const submitEmpleado= (e) =>{
         e.preventDefault()
+        if(nombre.trim() === "" || dni.trim() === ""|| cuil.trim() === "" || !idUsuario){
+            return
+        }
 
         agregarEmpleados(nuevoEmpleado)
 
@@ -59,7 +55,8 @@ const NuevoEmpleado = () => {
             fecha: "",
             domicilio:"",
             proyecto: "",
-            fechaF: ""
+            fechaF: "",
+            idUsuario: uid
         })
     } 
 

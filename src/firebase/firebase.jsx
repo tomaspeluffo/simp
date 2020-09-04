@@ -29,9 +29,10 @@ let empleados = firebase.firestore().collection('empleados');
 
 export function crearEmpleado(empleado){
     return empleados.add(empleado)
-        
+    .then(docRef => {
+        empleados.doc(docRef.id).update({id : docRef.id })
+    })
 } 
-
 
 
 export async function obtenerEmpleados(uid){
@@ -40,14 +41,22 @@ export async function obtenerEmpleados(uid){
     .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
 
-            listado.push(doc.data());
+            listado.push(doc.data() );
         });
     })
     .catch(function(error) {
         console.log("Error getting documents: ", error);
     });
 
-    console.log(listado)
     return listado
   
 }
+
+export async function editarEmpleadoFirebase(id, empleadoEditar){
+    await empleados.doc(id).set(empleadoEditar)
+}
+
+export async function eliminarEmpleadoFirebase(id){
+    await empleados.doc(id).delete()
+}
+

@@ -1,5 +1,7 @@
 .home{
     margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .titulo{
@@ -31,7 +33,8 @@
 
 }
 
-@media screen and (max-width: 850px) {
+
+@media screen and (max-width: 900px) {
     .contenedorHome{
         flex-direction: column;
          margin-top: 10vh;
@@ -43,4 +46,18 @@
         margin-left: auto;
         margin-right: auto;
     }
+  }
+
+
+  .login{
+      margin-left: auto;
+      margin-right: 10px;
+  }
+
+  .home-datos h2{
+      color: white;
+  }
+
+  .login button{
+      padding: 0.3rem;
   }

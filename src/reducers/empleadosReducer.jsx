@@ -2,24 +2,42 @@ import {
     CREAR_EMPLEADO,
     LEEER_EMPLEADO,
     LEEER_EMPLEADO_EXITO,
-    LEEER_EMPLEADO_ERROR
+    LEEER_EMPLEADO_ERROR,
+    OBTENER_EMPLEADO_EDITAR,
+    EDITAR_EMPLEADO,
+    OBTENER_EMPLEADO_ELIMINAR,
+    ELIMINAR_EMPLEADO
 }from '../types/index'
+import { act } from 'react-dom/test-utils'
 
 
 const initalState ={
     empleados: {}, 
     listadoEmpleado: [],
-    error: null,
-    empleadoeliminar: null,
-    empleadoeditar:null,
-    loading: false
+    error: false,
+    empleadoeliminar: {},
+    empleadoeditar:{},
+    loading: false, 
+  
 }
 
 export default function (state = initalState, action){
     switch (action.type) {
 
+    case ELIMINAR_EMPLEADO:
+        return {...state, empleadoeliminar: {}}
+
+    case OBTENER_EMPLEADO_ELIMINAR:
+        return{...state, empleadoeliminar : action.payload}
+
+    case EDITAR_EMPLEADO:
+        return{...state, empleadoeditar:{}}
+
+    case OBTENER_EMPLEADO_EDITAR:
+        return {...state, empleadoeditar : action.payload}
+    
     case LEEER_EMPLEADO_EXITO:
-        return{...state, loading: false, listadoEmpleado: action.payload, lsitadoEmpleado :state.listadoEmpleado.filter(empleado => empleado.idUsuario === state.usuario.uid )  }
+        return{ ...state, loading: false, listadoEmpleado: action.payload}
     
     case LEEER_EMPLEADO:
         return{...state, loading: true }
@@ -32,3 +50,6 @@ export default function (state = initalState, action){
             
 }
 }
+
+
+// , listadoEmpleado :state.listadoEmpleado.filter(empleado => empleado.idUsuario === state.usuario.uid )

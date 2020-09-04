@@ -2,16 +2,16 @@ import React, {useState, useEffect} from 'react'
 import './home.css'
 import { Link } from 'react-router-dom'
 import {loginGoogleAction, logoutGoogleAction} from '../../actions/userAction'
-import { obtenerEmpleadosAction} from '../../actions/empleadosAction'
 import { useDispatch, useSelector } from 'react-redux'
 
 const Home = () => {
+
 
   const dispatch = useDispatch();
 
   const login = () =>{
     dispatch (loginGoogleAction())
-  }
+}
 
   const logout = () =>{
       dispatch (logoutGoogleAction())
@@ -26,15 +26,17 @@ const Home = () => {
     return ( 
         <div>
             <div className="home">
+
+
+            <div className="login">
+                {superLogin ?< button onClick={logout}>Cierra tu sesión </button> : <button onClick={login}>Iniciar Sesion</button> }
+            </div>
+
+
                 <div className="titulo">    
                     <h1>SIMP</h1> {/* Sistema Integral de Manejo de Personal */}
 
-                    <div>
-
-                        {superLogin ?< button onClick={logout}>Cierra tu sesión </button> : <button onClick={login}>Iniciar</button> }
-                        
-
-                    </div>
+                   
                 </div>
 
                 <div className="contenedorHome">

@@ -18,7 +18,7 @@ export default function (state = initalState, action){
     switch (action.type) {
     
     case LOGOUT_EXITO:
-        return { ...state, loggedIn:false, user: [] }
+        return { ...state, loggedIn:false, user: []  }
 
     case LOGIN_ERROR:
         return{...state, fetching: false, loggedIn: false}
@@ -35,3 +35,6 @@ export default function (state = initalState, action){
             
 }
 } 
+
+
+// "This domain (relaxed-haibt-677820.netlify.app) is not authorized to run this operation. Add it to the OAuth redirect domains list in the Firebase console -> Auth section -> Sign in method tab."

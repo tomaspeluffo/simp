@@ -9,10 +9,16 @@ import {useDispatch, useSelector} from 'react-redux'
 
 
 const Empleados = () => {
-    
-    const listado = useSelector( (state) => state.empleado.listadoEmpleado)   
+    const [boton, guardarBoton] = useState(1)
 
-   const dispatch = useDispatch()
+    
+    const listado = useSelector( (state) => state.empleado.listadoEmpleado) 
+    const idFiltro = useSelector( (state) => state.usuario.user.uid) 
+    const listadoFiltrado = listado.filter(empleado => empleado.idUsuario === idFiltro)
+
+
+
+    const dispatch = useDispatch()
 
 
     const cargarDatos = () =>{
@@ -21,7 +27,9 @@ const Empleados = () => {
 
     useEffect(() => {
         cargarDatos()
-    }, [])
+    }, [listado])
+
+
 
 
     return ( 
@@ -30,23 +38,24 @@ const Empleados = () => {
             <h1>Listado de Empleados</h1>
 
 
-            <table className="">
-                <thead className="">
+            <table className="table table-striped">
+                <thead className="bg-primary table-dark">
                     <tr>
-                        <th scope="">Nombre</th>
-                        <th scope="">DNI</th>
-                        <th scope="">Proyecto</th>
-                        <th scope="">Fecha de Contrato</th>
-                        <th scope="">Acciones</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">DNI</th>
+                        <th scope="col">Proyecto</th>
+                        <th scope="col">Fecha de Contrato</th>
+                        <th scope="col">Acciones</th>
                     </tr>  
                 </thead>
                 <tbody>
-                    {listado.length === 0 ? null : (
-                        listado.map(empleado => (
-                            console.log(empleado),
+                    {listadoFiltrado.length === 0 ? null : (
+                        listadoFiltrado.map(empleado => (
                             <Empleado 
                                 key = {empleado.dni}
                                 empleado = {empleado}
+                                boton = {boton}
+                                guardarBoton = {guardarBoton}
                             />
                         ))
                     )}

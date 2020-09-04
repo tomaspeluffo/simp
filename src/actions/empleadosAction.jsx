@@ -2,11 +2,16 @@ import {
     CREAR_EMPLEADO,
     LEEER_EMPLEADO,
     LEEER_EMPLEADO_EXITO,
-    LEEER_EMPLEADO_ERROR
+    LEEER_EMPLEADO_ERROR,
+    OBTENER_ID,
+    OBTENER_EMPLEADO_EDITAR,
+    EDITAR_EMPLEADO,
+    OBTENER_EMPLEADO_ELIMINAR,
+    ELIMINAR_EMPLEADO
 
 }from '../types/index'
 
-import {crearEmpleado, obtenerEmpleados} from '../firebase/firebase'
+import {crearEmpleado, obtenerEmpleados, editarEmpleadoFirebase, eliminarEmpleadoFirebase} from '../firebase/firebase'
 
 
 export function crearEmpleadoAction(empleado){
@@ -60,5 +65,60 @@ const leerEmpleadosError = () =>({
 })
 
 
+// Colocar empleado en edicion
+export function obtenerEmpleadoEditarAction(empleado) {
+    return (dispatch) =>{
+        dispatch (obtenerEmpleadoEditar(empleado))
+    }
+}
+
+const obtenerEmpleadoEditar = (empleado) =>({
+    type: OBTENER_EMPLEADO_EDITAR,
+    payload: empleado
+})
+
+export function editarEmpleadoAction(id, empleado) {
+    return(dispatch) => {
+
+        try {
+            dispatch(editarEmpleado(empleado))
+            editarEmpleadoFirebase(id, empleado)
+        } catch (error) {
+            console.log(error.response)
+        }  
+    }
+}
+
+const editarEmpleado = () =>({
+    type: EDITAR_EMPLEADO
+})
 
 
+export function obtenerEmpleadoEliminarAction(empleado) {
+    return (dispatch) =>{
+        dispatch (obtenerEmpleadoEliminar(empleado))
+    }
+}
+
+const obtenerEmpleadoEliminar = (empleado) =>({
+    type: OBTENER_EMPLEADO_ELIMINAR,
+    payload: empleado
+})
+
+
+
+export function eliminarEmpleadoAction(id, empleado) {
+    return(dispatch) => {
+
+        try {
+            dispatch(eliminarEmpleado(empleado))
+            eliminarEmpleadoFirebase(id, empleado)
+        } catch (error) {
+            console.log(error.response)
+        }  
+    }
+}
+
+const eliminarEmpleado = () =>({
+    type: ELIMINAR_EMPLEADO
+})
