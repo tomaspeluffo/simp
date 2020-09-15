@@ -41,9 +41,12 @@ useEffect(() => {
     
 }, [])
 
-
+const idFiltro = useSelector( (state) => state.usuario.user.uid) 
 const proyectos = useSelector(state => state.proyecto.listadoproyectos)
 const empelados = useSelector(state => state.empleado.listadoEmpleado)
+const empleadoFiltrado = empelados.filter(empleado => empleado.idUsuario === idFiltro)
+const proyectoFiltrado = proyectos.filter(proyecto => proyecto.idUsuario === idFiltro)
+
   
 
 
@@ -90,8 +93,8 @@ const empelados = useSelector(state => state.empleado.listadoEmpleado)
 
                 <div className="home-datos">
                     <h2>Datos</h2>
-                    <p>Cantidad de empleados: {empelados.length }</p>
-                    <p>Cantidad de proyectos: {proyectos.length}</p>
+                    <p>Cantidad de empleados: {empleadoFiltrado.length }</p>
+                    <p>Cantidad de proyectos: {proyectoFiltrado.length}</p>
 
                 </div>
             </div>
