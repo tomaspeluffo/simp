@@ -27,7 +27,7 @@ const Proyectos = () => {
     useEffect(() => {
         cargarDatos()
         
-    }, [])
+    }, [listado])
 
    
 

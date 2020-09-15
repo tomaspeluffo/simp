@@ -47,7 +47,14 @@ const empelados = useSelector(state => state.empleado.listadoEmpleado)
 const empleadoFiltrado = empelados.filter(empleado => empleado.idUsuario === idFiltro)
 const proyectoFiltrado = proyectos.filter(proyecto => proyecto.idUsuario === idFiltro)
 
+
+
+    const empleadoAlerta = empleadoFiltrado.filter(empleado => Date.parse(empleado.fechaF) > Date.now()&& Date.parse(empleado.fechaF) < Date.now() + 86400000*30 ) 
+    const empleadoDanger = empleadoFiltrado.filter(empleado => Date.parse(empleado.fechaF) <= Date.now())
+
   
+
+
 
 
     return ( 
@@ -91,10 +98,30 @@ const proyectoFiltrado = proyectos.filter(proyecto => proyecto.idUsuario === idF
                     
                 </div>
 
+                <div className="indicadores">
                 <div className="home-datos">
                     <h2>Datos</h2>
                     <p>Cantidad de empleados: {empleadoFiltrado.length }</p>
                     <p>Cantidad de proyectos: {proyectoFiltrado.length}</p>
+
+                </div>
+
+                <div className="home-datos">
+                    <h2>Alertas</h2>
+                    {empleadoAlerta.map( alerta =>(
+                        
+                        <p key={alerta.id} className="alerta-warning">{`${alerta.nombre} tiene que ser dado de baja antes de ${alerta.fechaF}`}</p>
+
+                        ))}
+
+                    {empleadoDanger.map( alerta =>(
+                        
+                        <p key={alerta.id} className="alerta-danger">{`${alerta.nombre} tiene que ser dado de baja antes de ${alerta.fechaF}`}</p>
+
+                        ))}
+
+                
+                </div>
 
                 </div>
             </div>

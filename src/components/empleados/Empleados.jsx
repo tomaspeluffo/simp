@@ -28,7 +28,7 @@ const Empleados = () => {
     useEffect(() => {
         cargarDatos()
         
-    }, [])
+    }, [listado])
 
 
 

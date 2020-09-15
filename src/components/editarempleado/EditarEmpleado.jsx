@@ -57,6 +57,11 @@ const EditarEmpleado = () => {
     
     }
 
+    const idFiltro = useSelector( (state) => state.usuario.user.uid) 
+    const proyectos = useSelector(state => state.proyecto.listadoproyectos)
+    const proyectoFiltrado = proyectos.filter(proyecto => proyecto.idUsuario === idFiltro)
+
+
 
     return ( 
         <div className="form-empleado">
@@ -109,7 +114,13 @@ const EditarEmpleado = () => {
                         
                     >
                         <option value="">Elegir Proyecto</option> 
-                      
+                        {proyectoFiltrado.map( lista =>(
+                        <option 
+                        value={lista.nombre} 
+                        key= {lista.id}
+                        >{lista.nombre}</option> 
+
+                        ))}
                          
                     </select>   
                 </div>

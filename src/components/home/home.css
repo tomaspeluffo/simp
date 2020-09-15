@@ -61,3 +61,18 @@
   .login button{
       padding: 0.3rem;
   }
+
+  .indicadores{
+    margin-top: 5vh;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .alerta-warning{
+      color: yellow;
+  }
+
+  .alerta-danger{
+    color: orangered;
+}
