@@ -1,10 +1,10 @@
-    import React, { useState, useEffect } from 'react'
+    import React, { useState} from 'react'
 import './nuevoempleado.css';
 import { Link } from 'react-router-dom'
 
 
 // Redux
-import {crearEmpleadoAction, obtenerEmpleadosAction} from '../../actions/empleadosAction'
+import {crearEmpleadoAction} from '../../actions/empleadosAction'
 import {useDispatch, useSelector} from 'react-redux'
 
 

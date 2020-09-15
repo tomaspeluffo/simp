@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {useHistory } from 'react-router-dom'
 import {obtenerEmpleadoEditarAction, obtenerEmpleadoEliminarAction, eliminarEmpleadoAction} from '../../actions/empleadosAction'
 import {useDispatch, useSelector} from 'react-redux'
-import Swal from 'sweetalert2'
 
 
 
@@ -25,7 +24,6 @@ const Empleado = ({empleado, boton, guardarBoton}) => {
     }
 
     const id= useSelector( state => state.empleado.empleadoeliminar.id)
-    console.log(id)
 
     
     const eliminarEmpleado = (id, empleado) =>{

@@ -1,10 +1,58 @@
-import React, { useState } from 'react'
+import React, {useState, useEffect} from 'react'
 import './editarproyecto.css';
 import { Link } from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
+import {editarProyectoction} from '../../actions/proyectosAction'
+
+// redux
+import{useSelector, useDispatch} from 'react-redux'
 
 
 
 const EditarProyecto = () => {
+
+    const history = useHistory()
+    const dispatch = useDispatch()
+
+    // Nuevo state de producto
+    const[proyectoEditar, guardarProyectoEditar] = useState({
+        fechafin: "", 
+
+    })
+    
+    const {fechafin} = proyectoEditar
+
+
+
+    // Obtener el state 
+    const proyectoEdicion= useSelector( state => state.proyecto.proyectoeditar)
+    const id= useSelector( state => state.proyecto.proyectoeditar.id)
+
+
+    // llenar el state automaticamente
+
+    useEffect(() => {
+        guardarProyectoEditar(proyectoEdicion)
+
+    }, [proyectoEdicion])
+
+
+    const onChangeFormulario = e => {
+        guardarProyectoEditar({
+            ...proyectoEditar,
+            [e.target.name] : e.target.value
+        })
+    }
+
+
+    const submitProyecto = e => {
+        e.preventDefault();
+
+        dispatch( editarProyectoction(id, proyectoEditar) );
+
+        history.push('/proyectos')
+    
+    }
 
 
     return ( 
@@ -13,7 +61,7 @@ const EditarProyecto = () => {
             <h1 className="form-titulo">Alta Proyecto</h1>
             
         <form
-            // onSubmit={submitProyecto}
+            onSubmit={submitProyecto}
         >
             <div className="form-campo">
                 <label> Nombre Proyecto</label>
@@ -21,7 +69,6 @@ const EditarProyecto = () => {
                     type="text"
                     name= "nombre"
                     disabled={true}
-                    // onChange={actualizarState}
                     // value={nombre}
                 />
             </div>
@@ -31,7 +78,6 @@ const EditarProyecto = () => {
                 <input 
                     type="number"
                     name= "personal"
-                    // onChange={actualizarState}
                     // value={nombre}
                 />
             </div>
@@ -41,8 +87,8 @@ const EditarProyecto = () => {
                 <input 
                     type="date"
                     name= "fechafin"
-                    // onChange={actualizarState}
-                    // value={nombre}
+                    onChange={onChangeFormulario}
+                    value={fechafin}
                 />
             </div>
 

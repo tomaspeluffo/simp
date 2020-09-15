@@ -2,13 +2,11 @@ import {
     CREAR_EMPLEADO,
     LEEER_EMPLEADO,
     LEEER_EMPLEADO_EXITO,
-    LEEER_EMPLEADO_ERROR,
     OBTENER_EMPLEADO_EDITAR,
     EDITAR_EMPLEADO,
     OBTENER_EMPLEADO_ELIMINAR,
     ELIMINAR_EMPLEADO
 }from '../types/index'
-import { act } from 'react-dom/test-utils'
 
 
 const initalState ={

@@ -3,7 +3,6 @@ import {
     LEEER_EMPLEADO,
     LEEER_EMPLEADO_EXITO,
     LEEER_EMPLEADO_ERROR,
-    OBTENER_ID,
     OBTENER_EMPLEADO_EDITAR,
     EDITAR_EMPLEADO,
     OBTENER_EMPLEADO_ELIMINAR,
@@ -39,7 +38,6 @@ const crearEmpleadoExito = (empleados) => ({
 export const obtenerEmpleadosAction = () =>async (dispatch, getState) =>{
     dispatch(leerEmpleados())
 
-    const {uid} = getState().usuario.user
 
     try {
      let listado = await obtenerEmpleados()

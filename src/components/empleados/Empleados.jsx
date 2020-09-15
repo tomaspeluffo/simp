@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from 'react-redux'
 
 
 const Empleados = () => {
-    const [boton, guardarBoton] = useState(1)
+    const [boton, guardarBoton] = useState(true)
 
     
     const listado = useSelector( (state) => state.empleado.listadoEmpleado) 
@@ -27,7 +27,8 @@ const Empleados = () => {
 
     useEffect(() => {
         cargarDatos()
-    }, [listado])
+        
+    }, [])
 
 
 

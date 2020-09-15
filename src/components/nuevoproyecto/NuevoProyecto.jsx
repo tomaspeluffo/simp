@@ -1,9 +1,51 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 
+// Redux
+import {crearProyectoAction} from '../../actions/proyectosAction'
+import {useDispatch, useSelector} from 'react-redux'
 
 
 const NuevoProyecto = () => {
+
+    const dispatch = useDispatch()
+
+
+    const id = useSelector( (state) => state.usuario.user)  
+    const {uid} = id
+    
+    const [nuevoProyecto, guardarNuevoProyecto] = useState({
+        nombre: "",
+        personal: 0,
+        fechafin: "",
+        idUsuario: uid
+    })
+
+    const {nombre, personal, fechafin} = nuevoProyecto
+
+
+    const agregarProyecto = nuevoProyecto => dispatch( crearProyectoAction(nuevoProyecto) )
+
+    const eventHandler = e => {
+        guardarNuevoProyecto({
+            ...nuevoProyecto, 
+            [e.target.name] : e.target.value
+        })
+    }
+
+    const submitProyecto= (e) =>{
+        e.preventDefault()
+       
+
+        agregarProyecto(nuevoProyecto)
+
+        guardarNuevoProyecto({
+            nombre: "",
+            personal: 0,
+            fechafin: "",
+            idUsuario: uid
+        })
+    } 
 
 
 
@@ -13,15 +55,15 @@ const NuevoProyecto = () => {
                 <h1 className="form-titulo">Alta Proyecto</h1>
                 
             <form
-                // onSubmit={submitProyecto}
+                onSubmit={submitProyecto}
             >
                 <div className="form-campo">
                     <label> Nombre Proyecto</label>
                     <input 
                         type="text"
                         name= "nombre"
-                        // onChange={actualizarState}
-                        // value={nombre}
+                        onChange={eventHandler}
+                        value={nombre}
                     />
                 </div>
 
@@ -30,8 +72,8 @@ const NuevoProyecto = () => {
                     <input 
                         type="number"
                         name= "personal"
-                        // onChange={actualizarState}
-                        // value={nombre}
+                        onChange={eventHandler}
+                        value={personal}
                     />
                 </div>
 
@@ -40,8 +82,8 @@ const NuevoProyecto = () => {
                     <input 
                         type="date"
                         name= "fechafin"
-                        // onChange={actualizarState}
-                        // value={nombre}
+                        onChange={eventHandler}
+                        value={fechafin}
                     />
                 </div>
 
